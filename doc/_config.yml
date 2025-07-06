@@ -1,0 +1,15 @@
+# Disable Jekyll processing
+# This tells GitHub Pages to treat this as a static site
+# and not try to build it with Jekyll.
+theme: none
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
