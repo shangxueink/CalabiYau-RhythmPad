@@ -368,6 +368,59 @@
     </div>
 
     <script>
+
+        // 在页面开头添加设备检测代码
+        document.addEventListener('DOMContentLoaded', function () {
+            // 检测设备类型
+            function isMobileDevice() {
+                return (
+                    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                    (window.innerWidth <= 800 && window.innerHeight <= 600)
+                );
+            }
+
+            // 如果是移动设备，显示提示并隐藏主内容
+            if (isMobileDevice()) {
+                // 创建提示元素
+                const mobileNotice = document.createElement('div');
+                mobileNotice.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        `;
+
+                mobileNotice.innerHTML = `
+            <h2 style="color: #ffd700; margin-bottom: 20px;">暂不支持手机端用户体验</h2>
+            <p style="font-size: 16px; line-height: 1.5;">此应用需要键盘和鼠标操作,</p>
+            <p style="font-size: 16px; line-height: 1.5;">请使用电脑访问以获得最佳体验。</p>
+        `;
+
+                document.body.appendChild(mobileNotice);
+
+                // 隐藏原始内容
+                document.getElementById('three-container').style.display = 'none';
+                document.getElementById('overlay-ui').style.display = 'none';
+                document.getElementById('crosshair').style.display = 'none';
+                document.getElementById('hud-container').style.display = 'none';
+
+                // 阻止进一步加载
+                return;
+            }
+        });
+
+
         // 音频文件的映射，键是PAD的ID，值是文件路径
         const audioFiles = {
             'PAD1': 'https://raw.githubusercontent.com/shangxueink/CalabiYau-RhythmPad/refs/heads/main/docs/1.mp3',
