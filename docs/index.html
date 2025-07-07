@@ -562,8 +562,9 @@
             // 监听鼠标移动事件
             document.addEventListener('mousemove', (event) => {
                 if (isPointerLocked) {
-                    const movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
-                    const movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+                    // 获取鼠标移动距离，并确保有合理的最大值限制
+                    const movementX = Math.min(Math.max(event.movementX || 0, -50), 50);
+                    const movementY = Math.min(Math.max(event.movementY || 0, -50), 50);
 
                     // 左右旋转 (yaw)
                     yawObject.rotation.y -= movementX * mouseSensitivity;
@@ -573,6 +574,7 @@
                     pitchObject.rotation.x = Math.max(-PI_2, Math.min(PI_2, pitchObject.rotation.x)); // 限制上下视角
                 }
             }, false);
+
 
             // 监听鼠标点击事件
             document.addEventListener('mousedown', (event) => {
